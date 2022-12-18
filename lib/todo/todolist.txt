@@ -6,13 +6,23 @@ requisitos para execução:
 > github (sincronização de código)
 
 configurar um servidor
-> backend java
->
+> backend java (spring(?))
+> backend node
+> backend python
 
 exemplos de snippets em flutter
+> https://docs.flutter.dev/cookbook
 > https://flutter.github.io/samples/#
 > https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1/#1
 > https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2#0
+
+regras de negócio
+> haverá login anonimo?
+>
+
+necessário configurar tabelas do db
+> tabela cuidador
+>
 
 fazer uma lista de cuidadores
 > https://flutter.github.io/samples/provider_shopper.html exemplo
