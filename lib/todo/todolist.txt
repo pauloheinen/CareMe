@@ -1,0 +1,30 @@
+requisitos para execução:
+> instalar flutter
+> mysql
+> androidstudio, intellij
+> plugin de dart, flutter
+> github (sincronização de código)
+
+configurar um servidor
+> backend java
+>
+
+exemplos de snippets em flutter
+> https://flutter.github.io/samples/#
+> https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1/#1
+> https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2#0
+
+fazer uma lista de cuidadores
+> https://flutter.github.io/samples/provider_shopper.html exemplo
+
+fazer um seletor de abas
+> https://flutter.github.io/samples/isolate_example.html exemplo
+> https://flutter.github.io/samples/jsonexample.html exemplo
+
+fazer uma area de registro de cuidadores
+
+fazer uma area de perfil de cuidadores
+> será apresentada após clicar em um cuidador
+
+fazer uma tela de login
+> https://flutter.github.io/samples/form_app.html exemplo
