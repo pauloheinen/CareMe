@@ -1,6 +1,6 @@
 requisitos para execução:
 > instalar flutter
-> mysql
+> mysql 8
 > androidstudio, intellij
 > plugin de dart, flutter
 > github (sincronização de código)
@@ -27,7 +27,7 @@ necessário configurar tabelas do db
 fazer uma lista de cuidadores
 > https://flutter.github.io/samples/provider_shopper.html exemplo
 
-fazer um seletor de abas
+fazer um seletor de abas OK
 > https://flutter.github.io/samples/isolate_example.html exemplo
 > https://flutter.github.io/samples/jsonexample.html exemplo
 
