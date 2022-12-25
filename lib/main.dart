@@ -1,4 +1,5 @@
 import 'package:care_me/Tabs/ChatTab.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Tabs/HealersTab.dart';
@@ -15,7 +16,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Care Me app',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.dark,
       ),
@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(title: const Text("Care Me app")),
       body: _views[_currentViewIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: CupertinoColors.white,
         onTap: onTabTapped,
         currentIndex: _currentViewIndex,
         items: const [
