@@ -5,13 +5,15 @@ class HealerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: HealerPane(),
     );
   }
 }
 
 class HealerPane extends StatefulWidget {
+  const HealerPane({Key? key}) : super(key: key);
+
   @override
   createState() => _HealerPane();
 }
@@ -22,7 +24,7 @@ class _HealerPane extends State<HealerPane> {
         username: "nome",
         email: "email",
         urlAvatar:
-        "https://images.unsplash.com/photo-1669745355187-a926c7a721ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3MTk3NzQwMw&ixlib=rb-4.0.3&q=80&w=1080")
+            "https://images.unsplash.com/photo-1669745355187-a926c7a721ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3MTk3NzQwMw&ixlib=rb-4.0.3&q=80&w=1080")
   ];
 
   @override
@@ -64,8 +66,7 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-      ),
+      appBar: AppBar(),
       body: Center(
         child: Column(children: [
           const SizedBox(height: 16),
@@ -76,7 +77,6 @@ class UserPage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-
         ]),
       ));
 }

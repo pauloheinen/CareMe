@@ -24,7 +24,7 @@ necessário configurar tabelas do db
 > tabela cuidador
 >
 
-fazer uma lista de cuidadores
+fazer uma lista de cuidadores OK
 > https://flutter.github.io/samples/provider_shopper.html exemplo
 
 fazer um seletor de abas OK
