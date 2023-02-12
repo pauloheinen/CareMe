@@ -1,4 +1,3 @@
-import 'package:care_me/Service/UserService.dart';
 import 'package:flutter/material.dart';
 
 import '../Service/User.dart';
@@ -22,12 +21,24 @@ class HealerPane extends StatefulWidget {
 }
 
 class _HealerPane extends State<HealerPane> {
-  late List<User> listOfUsers;
+  List<User> listOfUsers = [
+    const User(
+      id: null,
+      username: "username",
+      name: null,
+      password: null,
+      email: "email",
+      cellphone: null,
+      about: null,
+      caregiver: null,
+      image:
+          "https://images.unsplash.com/photo-1669745355187-a926c7a721ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3MTk3NzQwMw&ixlib=rb-4.0.3&q=80&w=1080",
+    )
+  ];
 
   @override
   void initState() {
     super.initState();
-    listOfUsers = UserService().getUsers() as List<User>;
   }
 
   @override

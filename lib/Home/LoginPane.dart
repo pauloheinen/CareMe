@@ -1,11 +1,15 @@
-import 'dart:ui';
 
-import 'package:care_me/Values/Preferences.dart';
+import 'dart:async';
+
+import 'package:care_me/Utils/Preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 
 import '../Service/User.dart';
 import '../Service/UserService.dart';
+import '../Utils/ToastUtil.dart';
 import 'HomePane.dart';
 
 class Login extends StatefulWidget {
@@ -24,13 +28,6 @@ class _LoginState extends State<Login> {
   bool _rememberMe = false;
 
   @override
-  void dispose() {
-    userController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   void initState() {
     _autoLogin();
     super.initState();
@@ -39,129 +36,137 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: ListView(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.center,
+        body: SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom,
+            child: Form(
+              key: _formKey,
+              child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Image.asset('lib/Resources/logo.png'),
-              ),
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Entrar',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        userController.text.isEmpty) {
-                      return 'O campo deve ser preenchido!';
-                    }
-                    return null;
-                  },
-                  controller: userController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Usuário'),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'O campo deve ser preenchido!';
-                    }
-                    return null;
-                  },
-                  obscureText: true,
-                  controller: passwordController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Senha'),
-                  // errorText:
-                  // passwordController.text.isEmpty && ? "O campo deve ser preenchido!" : null),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
-                child: TextButton(
-                  onPressed: () {
-                    // forgotPassword();
-                  },
-                  child: const Text(
-                    'Esqueci minha senha',
-                  ),
-                ),
-              ),
-              CheckboxListTile(
-                  title:
-                  const Text("Lembrar de mim", // this isnt the right blue
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
-                      textAlign: TextAlign.start),
-                  contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  onChanged: (value) {
-                    setState(() => _rememberMe = !_rememberMe);
-                  },
-                  value: _rememberMe,
-                  checkColor: CupertinoColors.systemBlue,
-                  activeColor: Colors.transparent),
-              Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('login', style: TextStyle(fontSize: 20)),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _doLogin();
-                    }
-                  },
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextButton(
-                    child: const Text(
-                      'Criar conta',
-                      style: TextStyle(fontSize: 20),
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(10),
+                      child: Image.asset('lib/Resources/logo.png'),
                     ),
-                    onPressed: () {
-                      // createAccount();
-                    },
-                  )
-                ],
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
+                        'Entrar',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              userController.text.isEmpty) {
+                            return 'O campo deve ser preenchido!';
+                          }
+                          return null;
+                        },
+                        controller: userController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: 'Usuário'),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'O campo deve ser preenchido!';
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                        controller: passwordController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: 'Senha'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
+                      child: TextButton(
+                        onPressed: () {
+                          // forgotPassword();
+                        },
+                        child: const Text(
+                          'Esqueci minha senha',
+                        ),
+                      ),
+                    ),
+                    CheckboxListTile(
+                        title:
+                        const Text("Lembrar de mim", // this isnt the right blue
+                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            textAlign: TextAlign.start),
+                        contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        onChanged: (value) {
+                          setState(() => _rememberMe = !_rememberMe);
+                        },
+                        value: _rememberMe,
+                        checkColor: CupertinoColors.systemBlue,
+                        activeColor: Colors.transparent),
+                    Container(
+                      height: 50,
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: ElevatedButton(
+                        child: const Text('login', style: TextStyle(fontSize: 20)),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _doLogin();
+                          }
+                        },
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        TextButton(
+                          child: const Text(
+                            'Criar conta',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {
+                            // createAccount();
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Future<void> _doLogin() async {
-    User? user = await UserService()
-        .loginUser(userController.text, passwordController.text);
+    User? user;
+    try{
+       user = await UserService()
+          .loginUser(userController.text, passwordController.text);
+    }
+    on TimeoutException catch ( ignored )
+    {
+      ToastUtil.noConnectionToast( context);
+      return;
+    }
 
     if (user == null) {
+      ToastUtil.userNotFoundToast(context);
       return;
     }
 
     Preferences.clearUserData();
 
     Preferences.saveRememberMe(_rememberMe);
-
-    if (_rememberMe) {
-      Preferences.saveUserData(user);
-    }
+    Preferences.saveUserData(user);
 
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const HomePane()));
