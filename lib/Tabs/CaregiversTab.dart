@@ -1,4 +1,7 @@
+import 'package:care_me/Service/UserService.dart';
 import 'package:flutter/material.dart';
+
+import '../Service/User.dart';
 
 class HealerView extends StatelessWidget {
   const HealerView({Key? key}) : super(key: key);
@@ -19,22 +22,22 @@ class HealerPane extends StatefulWidget {
 }
 
 class _HealerPane extends State<HealerPane> {
-  List<User> users = [
-    const User(
-        username: "nome",
-        email: "email",
-        urlAvatar:
-            "https://images.unsplash.com/photo-1669745355187-a926c7a721ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3MTk3NzQwMw&ixlib=rb-4.0.3&q=80&w=1080")
-  ];
+  late List<User> listOfUsers;
+
+  @override
+  void initState() {
+    super.initState();
+    listOfUsers = UserService().getUsers() as List<User>;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: users.length,
+        itemCount: listOfUsers.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          final user = users[index];
+          final user = listOfUsers[index];
           return Card(
             child: ListTile(
               onTap: () {
@@ -43,8 +46,8 @@ class _HealerPane extends State<HealerPane> {
                 ));
               },
               leading: CircleAvatar(
-                radius: 28,
-                backgroundImage: NetworkImage(user.urlAvatar),
+                radius: 45,
+                backgroundImage: NetworkImage(user.image!),
               ),
               title: Text(user.username),
               trailing: const Icon(Icons.arrow_forward),
@@ -66,26 +69,18 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(children: [
-          const SizedBox(height: 16),
-          Text(
-            user.username,
-            style: const TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
+        appBar: AppBar(),
+        body: Center(
+          child: Column(children: [
+            const SizedBox(height: 16),
+            Text(
+              user.name!,
+              style: const TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ]),
-      ));
-}
-
-class User {
-  final String username;
-  final String email;
-  final String urlAvatar;
-
-  const User(
-      {required this.username, required this.email, required this.urlAvatar});
+          ]),
+        ),
+      );
 }

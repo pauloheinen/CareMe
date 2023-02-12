@@ -1,6 +1,6 @@
 requisitos para execução:
 > instalar flutter
-> mysql 8
+> mysql 5.7
 > androidstudio, intellij
 > plugin de dart, flutter
 > github (sincronização de código)
@@ -31,10 +31,13 @@ fazer um seletor de abas OK
 > https://flutter.github.io/samples/isolate_example.html exemplo
 > https://flutter.github.io/samples/jsonexample.html exemplo
 
-fazer uma area de registro de cuidadores
+fazer uma area de registro de cuidadores OK
 
-fazer uma area de perfil de cuidadores
+fazer uma area de perfil de cuidadores OK
 > será apresentada após clicar em um cuidador
 
-fazer uma tela de login
+fazer uma tela de login OK
 > https://flutter.github.io/samples/form_app.html exemplo
+
+icones
+> https://medium.com/@bharadwaj.palakurthy/the-easiest-way-to-make-app-icons-in-flutter-9fe1bc9dd646#:~:text=Icon%20size%20must%20be%20up%20to%201024x1024%20pixels

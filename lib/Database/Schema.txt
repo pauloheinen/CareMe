@@ -1,0 +1,15 @@
+create database CareMe;
+
+create table Users(
+    id integer not null auto_increment,
+    username varchar(20) not null,
+    name varchar(160) not null,
+    password varchar(65) not null,
+    email varchar(40) not null unique,
+    cellphone varchar(11) not null unique,
+    about varchar(4000),
+    isCaregiver boolean not null,
+    image blob,
+
+    primary key( id )
+);
