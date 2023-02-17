@@ -10,20 +10,24 @@ class UserService {
   static const Map<String, String> headers = {
     'Content-Type': 'application/json'
   };
-static const timeout = 5;
+  static const timeout = 5;
 
   Future<http.Response> doGetRequest(String endpoint) async {
-    return await http.get(Uri.http(host, endpoint)).timeout(const Duration(seconds: timeout));
+    return await http
+        .get(Uri.http(host, endpoint))
+        .timeout(const Duration(seconds: timeout));
   }
 
   Future<http.Response> doPostRequest(String endpoint, String json) async {
-    return await http.post(Uri.http(host, endpoint),
-        body: json, headers: headers).timeout(const Duration(seconds: timeout));
+    return await http
+        .post(Uri.http(host, endpoint), body: json, headers: headers)
+        .timeout(const Duration(seconds: timeout));
   }
 
   Future<http.Response> doPutRequest(String endpoint, String json) async {
-    return await http.put(Uri.http(host, endpoint),
-        body: json, headers: headers).timeout(const Duration(seconds: timeout));
+    return await http
+        .put(Uri.http(host, endpoint), body: json, headers: headers)
+        .timeout(const Duration(seconds: timeout));
   }
 
   Future<http.Response> getUsers() async {
@@ -41,7 +45,7 @@ static const timeout = 5;
     return null;
   }
 
-  void updateUser(User newUser) async {
+  Future<int> updateUser(User newUser) async {
     String jsonFile = json.encode(User(
         id: newUser.id,
         username: newUser.username,
@@ -54,13 +58,12 @@ static const timeout = 5;
         image: newUser.image));
 
     http.Response response =
-        await doPutRequest('update/user/${newUser.id}', jsonFile);
+        await doPutRequest('/api/v1/update/user/${newUser.id}', jsonFile);
 
     if (response.statusCode == HttpStatus.ok) {
-      var decoded = json.decode(response.body);
-
-      print("user service: update user: \n" );
-      print(decoded);
+      return HttpStatus.ok;
+    } else {
+      return HttpStatus.badRequest;
     }
   }
 

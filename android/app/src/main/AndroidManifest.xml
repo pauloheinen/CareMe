@@ -2,10 +2,19 @@
     package="com.app.careme.care_me">
     <!-- Required to fetch data from the internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+            android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+            android:maxSdkVersion="29"
+            android:minSdkVersion="21"/>
+
+
     <application
         android:label="care_me"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
+        android:preserveLegacyExternalStorage="true">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

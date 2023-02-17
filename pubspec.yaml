@@ -27,13 +27,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  rxdart:
-  dio:
   http:
   shared_preferences: ^2.0.15
-  image_picker: any
-  cached_network_image: any
-  motion_toast: 1.0.0
+  image_picker: ^0.8.6+1
+  motion_toast: ^2.6.5
+  gallery_saver: ^2.3.2
   flutter:
     sdk: flutter
 

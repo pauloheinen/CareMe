@@ -1,11 +1,8 @@
-
 import 'dart:async';
 
 import 'package:care_me/Utils/Preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motion_toast/motion_toast.dart';
-import 'package:motion_toast/resources/arrays.dart';
 
 import '../Service/User.dart';
 import '../Service/UserService.dart';
@@ -38,7 +35,8 @@ class _LoginState extends State<Login> {
     return Scaffold(
         body: SingleChildScrollView(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom,
+            height: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).viewInsets.bottom,
             child: Form(
               key: _formKey,
               child: Padding(
@@ -148,13 +146,11 @@ class _LoginState extends State<Login> {
 
   Future<void> _doLogin() async {
     User? user;
-    try{
-       user = await UserService()
+    try {
+      user = await UserService()
           .loginUser(userController.text, passwordController.text);
-    }
-    on TimeoutException catch ( ignored )
-    {
-      ToastUtil.noConnectionToast( context);
+    } on TimeoutException catch (ignored) {
+      ToastUtil.noConnectionToast(context);
       return;
     }
 
