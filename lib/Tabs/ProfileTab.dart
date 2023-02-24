@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../Service/User.dart';
+import '../Models/User.dart';
+import '../Utils/UserUtil.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -34,6 +35,8 @@ class _ProfilePane extends State<ProfilePane> {
   bool _editMode = false;
   bool _isLoaded = false;
 
+  late User _user;
+  
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -49,16 +52,16 @@ class _ProfilePane extends State<ProfilePane> {
   }
 
   _loadUser() async {
-    User user = await Preferences.getUserData();
+    _user = await Preferences.getUserData();
 
-    _usernameController.text = user.username;
-    _nameController.text = user.name!;
-    _passwordController.text = user.password!;
-    _cellphoneController.text = user.cellphone!;
-    _mailController.text = user.email!;
-    _iAmCaregiver = user.caregiver!;
-    _aboutController.text = user.about!;
-    _imageController = user.image!;
+    _usernameController.text = _user.username;
+    _nameController.text = _user.name!;
+    _passwordController.text = _user.password!;
+    _cellphoneController.text = _user.cellphone!;
+    _mailController.text = _user.email!;
+    _iAmCaregiver = _user.caregiver!;
+    _aboutController.text = _user.about!;
+    _imageController = _user.image!;
 
     setState(() {
       _isLoaded = true;
@@ -86,10 +89,7 @@ class _ProfilePane extends State<ProfilePane> {
                       Align(
                         alignment: Alignment.center,
                         child: CircleAvatar(
-                          backgroundImage: Image.memory(
-                              const Base64Decoder()
-                                  .convert(_imageController))
-                              .image,
+                          backgroundImage: UserUtil.loadUserProfileImage(_user),
                           radius: 85,
                         ),
                       ),

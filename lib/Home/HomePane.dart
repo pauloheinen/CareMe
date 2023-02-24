@@ -1,3 +1,4 @@
+import 'package:care_me/Models/User.dart';
 import 'package:care_me/Tabs/ChatTab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,18 +7,19 @@ import '../Tabs/CaregiversTab.dart';
 import '../Tabs/ProfileTab.dart';
 
 class HomePane extends StatefulWidget {
-  const HomePane({Key? key}) : super(key: key);
+  const HomePane({Key? key, required User? user}) : super(key: key);
 
   @override
-  _HomePane createState() => _HomePane();
+  State<HomePane> createState() => _HomePane();
 }
 
 class _HomePane extends State<HomePane> {
+
   int _currentViewIndex = 0;
 
   final List<Widget> _views = [
-    ProfileView(),
-    HealerView(),
+    const ProfileView(),
+    const CaregiverView(),
     ChatView(),
   ];
 

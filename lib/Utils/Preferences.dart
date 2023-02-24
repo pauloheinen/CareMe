@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Service/User.dart';
+import '../Models/User.dart';
 
 class Preferences {
   static const USER_LOGIN_DATA = "USER_LOGIN_DATA";

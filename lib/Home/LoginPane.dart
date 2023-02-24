@@ -4,7 +4,7 @@ import 'package:care_me/Utils/Preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Service/User.dart';
+import '../Models/User.dart';
 import '../Service/UserService.dart';
 import '../Utils/ToastUtil.dart';
 import 'HomePane.dart';
@@ -147,7 +147,7 @@ class _LoginState extends State<Login> {
   Future<void> _doLogin() async {
     User? user;
     try {
-      user = await UserService()
+      user =  await UserService()
           .loginUser(userController.text, passwordController.text);
     } on TimeoutException catch (ignored) {
       ToastUtil.noConnectionToast(context);
@@ -165,15 +165,16 @@ class _LoginState extends State<Login> {
     Preferences.saveUserData(user);
 
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const HomePane()));
+        .push(MaterialPageRoute(builder: (context) => HomePane(user: user)));
   }
 
   void _autoLogin() async {
     bool? autoLogin = await Preferences.isRemember();
 
     if (autoLogin == true) {
+      User user = await Preferences.getUserData();
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const HomePane()));
+          .push(MaterialPageRoute(builder: (context) => HomePane(user: user)));
     }
   }
 }

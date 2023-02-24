@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import 'User.dart';
+import '../Models/User.dart';
 
 class UserService {
   static const String host = "192.168.128.1:8080";
@@ -12,31 +12,35 @@ class UserService {
   };
   static const timeout = 5;
 
-  Future<http.Response> doGetRequest(String endpoint) async {
+  Future<http.Response> _doGetRequest(String endpoint) async {
     return await http
         .get(Uri.http(host, endpoint))
         .timeout(const Duration(seconds: timeout));
   }
 
-  Future<http.Response> doPostRequest(String endpoint, String json) async {
+  Future<http.Response> _doPostRequest(String endpoint, String json) async {
     return await http
         .post(Uri.http(host, endpoint), body: json, headers: headers)
         .timeout(const Duration(seconds: timeout));
   }
 
-  Future<http.Response> doPutRequest(String endpoint, String json) async {
+  Future<http.Response> _doPutRequest(String endpoint, String json) async {
     return await http
         .put(Uri.http(host, endpoint), body: json, headers: headers)
         .timeout(const Duration(seconds: timeout));
   }
 
   Future<http.Response> getUsers() async {
-    return doGetRequest('/api/v1/get/users');
+    return _doGetRequest('/api/v1/get/users');
+  }
+
+  Future<http.Response> getUsersButNot(id) async {
+    return _doGetRequest('/api/v1/get/users/not/$id');
   }
 
   Future<User?> getUserByUsername(username) async {
     http.Response response =
-        await doGetRequest('/api/v1/get/user/username/$username');
+    await _doGetRequest('/api/v1/get/user/username/$username');
 
     if (response.statusCode == HttpStatus.ok) {
       return User.fromJson(json.decode(response.body));
@@ -58,7 +62,7 @@ class UserService {
         image: newUser.image));
 
     http.Response response =
-        await doPutRequest('/api/v1/update/user/${newUser.id}', jsonFile);
+    await _doPutRequest('/api/v1/update/user/${newUser.id}', jsonFile);
 
     if (response.statusCode == HttpStatus.ok) {
       return HttpStatus.ok;
@@ -79,7 +83,7 @@ class UserService {
         caregiver: null,
         image: null));
 
-    http.Response response = await doPostRequest('/api/v1/login', jsonFile);
+    http.Response response = await _doPostRequest('/api/v1/login', jsonFile);
 
     if (response.statusCode == HttpStatus.ok) {
       return User.fromJson(json.decode(response.body));

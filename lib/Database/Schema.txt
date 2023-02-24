@@ -1,15 +1,16 @@
 create database CareMe;
 
-create table Users(
-    id integer not null auto_increment,
-    username varchar(20) not null,
-    name varchar(160) not null,
-    password varchar(65) not null,
-    email varchar(40) not null unique,
-    cellphone varchar(11) not null unique,
-    about varchar(4000),
-    isCaregiver boolean not null,
-    image blob,
-
-    primary key( id )
-);
+CREATE TABLE `users` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `username` varchar(20) NOT NULL,
+     `name` varchar(160) NOT NULL,
+     `password` varchar(65) NOT NULL,
+     `email` varchar(40) NOT NULL,
+     `cellphone` varchar(11) NOT NULL,
+     `about` varchar(4000) DEFAULT NULL,
+     `is_caregiver` tinyint(1) NOT NULL,
+     `image` blob,
+     PRIMARY KEY (`id`),
+     UNIQUE KEY `email` (`email`),
+     UNIQUE KEY `cellphone` (`cellphone`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1
